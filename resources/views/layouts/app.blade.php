@@ -15,22 +15,57 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            <livewire:layout.navigation />
+        <div class="flex">
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+            <!--Sidebar-->
+            <div class=" hidden md:flex h-screen bg-gray-800">
+
+                <div class="w-64 bg-gray-100">
+                    <div class="bg-blue-500 py-4 h-40 flex flex-col items-center">
+                        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="w-20">
+                        <span class="text-white text-lg font-semibold mt-2">Company Name</span>
                     </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                    <nav class="mt-8 tx-blue-700">
+                        <ul class="flex flex-col items-center text-white">
+                            <li class="mb-2">
+                                <livewire:raffles.option-buttons :label="'Usuarios'" :link="'/usuarios'" :icon="'group'" />
+                            </li>
+                            <li class="mb-2">
+                                <livewire:raffles.option-buttons :label="'Dashboard'" :link="'/dashboard'" :icon="'tile'" />
+                            </li>
+                            <li class="mb-2">
+                                <livewire:raffles.option-buttons :label="'Rifas'" :link="'/rifas'" :icon="'switch'" />
+                            </li>
+                            <li class="mb-2">
+                                <livewire:raffles.option-buttons :label="'Asignaciones'" :link="'/asignaciones'" :icon="'walk'" />
+                            </li>
+                            <li class="mb-2">
+                                <livewire:raffles.option-buttons :label="'Boletas'" :link="'/boletas'" :icon="'ticket'" />
+                            </li>
+                            <li class="mb-2">
+                                <livewire:raffles.option-buttons :label="'Premios'" :link="'/premios'" :icon="'lightning'" />
+                            </li>
+                            <li class="mb-2">
+                                <livewire:raffles.option-buttons :label="'Comisiones'" :link="'/comisiones'" :icon="'dollar'" />
+                            </li>
+                            <li class="mb-2">
+                                <livewire:raffles.option-buttons :label="'Arqueos'" :link="'/arqueos'" :icon="'histogram'" />
+                            </li>
+                            <li class="mb-2">
+                                <livewire:raffles.option-buttons :label="'Entregas'" :link="'/entregas'" :icon="'stack'" />
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            
+            </div>
+            
+            <div class="w-full">
+                <livewire:layout.navigation  />
+                <main class="container mx-auto px-2 w-full">
+                    @yield('content')
+                </main>
+            </div>
         </div>
     </body>
 </html>

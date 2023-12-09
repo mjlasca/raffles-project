@@ -14,16 +14,19 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/" wire:navigate>
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
+    <body class="font-sans text-gray-900 bg-gray-100 m-0 overflow-hidden">
+        <div class="flex items-center justify-center h-screen">
+            <div class="md:w-3/5 flex items-center justify-center">
+                <div class=" w-80">
+                    <h2 class="text-blue-500 text-4xl"><b>Bienvenid@</b></h2>
+                    <p>
+                        Ingresa tu usuario y contraseña
+                    </p>
+                    {{ $slot }}
+                </div>
             </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+            <div class="hidden md:flex h-full w-2/5">
+                <img class="w-full h-full" src="{{ asset('img/bg-login.png') }}" alt="Background login">
             </div>
         </div>
     </body>
