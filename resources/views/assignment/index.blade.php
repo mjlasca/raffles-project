@@ -14,20 +14,31 @@
                 <table class="min-w-full">
                     <thead>
                         <tr class="text-md font-semibold tracking-wide text-left text-white bg-green-500 uppercase border-b border-gray-600">
-                            <th class="py-2 px-4 border-b">Rifa</th>
+                            <th class="py-2 px-4 border-b">Nombre rifa</th>
                             <th class="py-2 px-4 border-b">Vendedor</th>
                             <th class="py-2 px-4 border-b">Total boletas</th>
                             <th class="py-2 px-4 border-b">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @php $total = 0; @endphp
+                        @php $total = 0; $idRaffle = ""; @endphp
                         @foreach($assignments as $assignment)
-                            @php $idRaffle = $assignment->raffle->id; $total = $total + $assignment->tickets_total; @endphp
+                            @if($idRaffle != $assignment->raffle->id)
+                                <tr class="bg-blue-100">
+                                    
+                                    <td class="py-2 px-4"><a href="rifas/{{ $assignment->raffle->id }}"> {{ $assignment->raffle->name }} </a></td>
+                                    <td></td>
+                                    <td>{{ $assignment->raffle->tickets_number }}</td>
+                                    <td class="py-2 px-4 flex">
+                                        <a href="{{ route('asignaciones.destroy', $assignment->id) }}" class="text-yellow-500 hover:bg-green-500 p-1 bg-red-500 rounded-md mr-1">
+                                            <img class="h-5" src="{{ asset('img/icons/delete-icon.svg') }}" alt="Eliminar" title="Eliminar">
+                                        </a>
+                                    </td>
+                                </tr>
+                                @php $total = 0; @endphp
+                            @endif
                             <tr class="hover:bg-gray-100 border-b">
-                                <td class="py-2 px-4">
-                                   <a href="rifas/{{ $assignment->raffle->id }}"> {{ $assignment->raffle->name }} </a>
-                                </td>
+                                <td></td>
                                 <td class="py-2 px-4">
                                     {{ $assignment->user->name }}
                                 </td>
@@ -47,20 +58,8 @@
                                 </td>
                                
                             </tr>
-                            @if($idRaffle != $assignment->raffle->id)
-                                <tr>
-                                    <td>Total números</td>
-                                    <td></td>
-                                    <td>{{ $total }}</td>
-                                    <td>
-                                        <a href="{{ route('asignaciones.destroy', $assignment->id) }}" class="text-yellow-500 hover:bg-green-500 p-1 bg-red-500 rounded-md mr-1">
-                                            <img class="h-5" src="{{ asset('img/icons/delete-icon.svg') }}" alt="Eliminar" title="Eliminar">
-                                        </a>
-                                    </td>
-                                </tr>
-                                @php $total = 0; @endphp
-                            @endif
                             
+                            @php $idRaffle = $assignment->raffle->id; $total = $total + $assignment->tickets_total; @endphp
                         @endforeach
                     </tbody>
                 </table>
